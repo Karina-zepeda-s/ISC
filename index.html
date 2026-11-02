@@ -1,11 +1,399 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dragon City - ¡Construye tu Imperio de Dragones!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap');
+    
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .bg-dragon-pattern {
+      background-color: #0d0926;
+      background-image: 
+        radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.15) 0%, transparent 60%);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-nav {
+      background: rgba(13, 9, 38, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glow-orange {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+    }
+    
+    .glow-orange:hover {
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.7);
+    }
+
+    .dragon-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dragon-card:hover {
+      transform: translateY(-8px);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(1deg); }
+    }
+
+    .animate-float {
+      animation: float 5s ease-in-out infinite;
+    }
+  </style>
 </head>
-<body>
-    <h1>Mi sitio web</h1>
+<body class="bg-dragon-pattern text-white min-h-screen antialiased selection:bg-amber-500 selection:text-black">
+
+  <!-- NAVIGATION -->
+  <nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer">
+        <div class="w-10 h-10 bg-gradient-to-tr from-amber-500 to-red-600 rounded-xl flex items-center justify-center font-black text-xl shadow-lg transform -rotate-6">
+          <i class="fa-solid font-black fa-dragon text-white"></i>
+        </div>
+        <span class="text-2xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-400 to-red-500 uppercase">
+          Dragon City
+        </span>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
+        <a href="#inicio" class="hover:text-amber-400 transition-colors">INICIO</a>
+        <a href="#dragones" class="hover:text-amber-400 transition-colors">DRAGONES</a>
+        <a href="#caracteristicas" class="hover:text-amber-400 transition-colors">CARACTERÍSTICAS</a>
+        <a href="#comunidad" class="hover:text-amber-400 transition-colors">COMUNIDAD</a>
+      </div>
+
+      <a href="#descargar" class="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-black font-extrabold px-6 py-2.5 rounded-full text-sm uppercase tracking-wider transition-all duration-300 glow-orange flex items-center space-x-2">
+        <i class="fa-solid fa-gamepad"></i>
+        <span>Jugar Ahora</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="inicio" class="pt-32 pb-20 md:pt-40 md:pb-32 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <div class="space-y-8 text-center lg:text-left">
+          <div class="inline-flex items-center space-x-2 bg-amber-500/10 border border-amber-500/30 px-4 py-1.5 rounded-full text-amber-400 text-xs font-semibold uppercase tracking-wider">
+            <i class="fa-solid fa-fire text-amber-400"></i>
+            <span>¡Nuevos Dragones Legendarios Disponibles!</span>
+          </div>
+          
+          <h1 class="text-4xl sm:text-6xl font-black leading-none tracking-tight">
+            CONSTRUYE TU <br/>
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-500 to-red-600">
+              IMPERIO DRACÓNICO
+            </span>
+          </h1>
+
+          <p class="text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+            Cría, entrena y combate con más de 1,000 dragones únicos. Construye tus islas flotantes y domina la arena de combate PvP.
+          </p>
+
+          <!-- PLATFORM BUTTONS -->
+          <div id="descargar" class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+            <a href="#" class="glass-card hover:bg-white/10 px-6 py-3.5 rounded-xl flex items-center space-x-3 transition-all duration-300 border border-white/10 hover:border-amber-500/50">
+              <i class="fa-brands fa-google-play text-2xl text-amber-400"></i>
+              <div class="text-left">
+                <div class="text-[10px] text-gray-400 uppercase leading-none">Disponible en</div>
+                <div class="text-sm font-bold">Google Play</div>
+              </div>
+            </a>
+
+            <a href="#" class="glass-card hover:bg-white/10 px-6 py-3.5 rounded-xl flex items-center space-x-3 transition-all duration-300 border border-white/10 hover:border-amber-500/50">
+              <i class="fa-brands fa-apple text-2xl text-amber-400"></i>
+              <div class="text-left">
+                <div class="text-[10px] text-gray-400 uppercase leading-none">Descargar en</div>
+                <div class="text-sm font-bold">App Store</div>
+              </div>
+            </a>
+
+            <a href="#" class="glass-card hover:bg-white/10 px-6 py-3.5 rounded-xl flex items-center space-x-3 transition-all duration-300 border border-white/10 hover:border-amber-500/50">
+              <i class="fa-solid fa-desktop text-2xl text-amber-400"></i>
+              <div class="text-left">
+                <div class="text-[10px] text-gray-400 uppercase leading-none">Juega en</div>
+                <div class="text-sm font-bold">Windows / PC</div>
+              </div>
+            </a>
+          </div>
+
+          <!-- STATS BADGES -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-lg mx-auto lg:mx-0">
+            <div>
+              <div class="text-2xl sm:text-3xl font-black text-amber-400">+100M</div>
+              <div class="text-xs text-gray-400 font-medium">Descargas</div>
+            </div>
+            <div>
+              <div class="text-2xl sm:text-3xl font-black text-amber-400">+1,000</div>
+              <div class="text-xs text-gray-400 font-medium">Dragones</div>
+            </div>
+            <div>
+              <div class="text-2xl sm:text-3xl font-black text-amber-400">4.7★</div>
+              <div class="text-xs text-gray-400 font-medium">Valoración</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO ILLUSTRATION -->
+        <div class="relative flex justify-center items-center">
+          <div class="absolute w-72 h-72 sm:w-96 sm:h-96 bg-amber-500/20 rounded-full blur-3xl -z-10"></div>
+          <div class="relative w-full max-w-md animate-float">
+            <div class="glass-card rounded-3xl p-6 border border-amber-500/30 shadow-2xl relative overflow-hidden">
+              <div class="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-transparent w-32 h-32 opacity-20 rounded-bl-full"></div>
+              
+              <!-- MOCK DRAGON HERO CONTAINER -->
+              <div class="h-80 bg-gradient-to-b from-purple-900/40 to-slate-900/80 rounded-2xl flex flex-col items-center justify-center relative overflow-hidden border border-white/5">
+                <i class="fa-solid fa-dragon text-9xl text-amber-500 drop-shadow-[0_10px_20px_rgba(245,158,11,0.5)]"></i>
+                <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center bg-black/60 backdrop-blur-md p-3 rounded-xl border border-white/10">
+                  <div>
+                    <h3 class="font-black text-amber-400">Dragón Llama Astral</h3>
+                    <p class="text-xs text-gray-300">Rareza: Legendario</p>
+                  </div>
+                  <span class="bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs px-2.5 py-1 rounded-lg font-bold">NVL 40</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY / DRAGONS SECTION -->
+  <section id="dragones" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight mb-4">
+          DESCUBRE TUS <span class="text-amber-400">DRAGONES</span>
+        </h2>
+        <p class="text-gray-400">Fusiónalos, evoluciónalos y desbloquea habilidades devastadoras.</p>
+      </div>
+
+      <!-- CARDS GRID -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- CARD 1 -->
+        <div class="glass-card rounded-2xl p-4 dragon-card border border-white/10 hover:border-amber-500/50 flex flex-col justify-between">
+          <div>
+            <div class="h-48 bg-gradient-to-b from-red-900/30 to-orange-900/10 rounded-xl flex items-center justify-center relative mb-4">
+              <i class="fa-solid fa-dragon text-7xl text-red-500 drop-shadow-lg"></i>
+              <span class="absolute top-3 right-3 bg-red-500/20 border border-red-500/40 text-red-300 text-xs font-bold px-2 py-0.5 rounded-md">
+                FUEGO
+              </span>
+            </div>
+            <h3 class="text-xl font-bold mb-1">Dragón Llama</h3>
+            <p class="text-xs text-gray-400 mb-4">Ataques ardientes de alto impacto.</p>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div>
+              <div class="flex justify-between text-gray-400 mb-1"><span>Ataque</span><span class="text-white font-bold">850</span></div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-red-500 h-full rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-gray-400 mb-1"><span>Defensa</span><span class="text-white font-bold">620</span></div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-amber-500 h-full rounded-full" style="width: 62%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="glass-card rounded-2xl p-4 dragon-card border border-white/10 hover:border-amber-500/50 flex flex-col justify-between">
+          <div>
+            <div class="h-48 bg-gradient-to-b from-cyan-900/30 to-blue-900/10 rounded-xl flex items-center justify-center relative mb-4">
+              <i class="fa-solid fa-dragon text-7xl text-cyan-400 drop-shadow-lg"></i>
+              <span class="absolute top-3 right-3 bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-bold px-2 py-0.5 rounded-md">
+                AGUA
+              </span>
+            </div>
+            <h3 class="text-xl font-bold mb-1">Dragón Tsunami</h3>
+            <p class="text-xs text-gray-400 mb-4">Control del campo y sanación líquida.</p>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div>
+              <div class="flex justify-between text-gray-400 mb-1"><span>Ataque</span><span class="text-white font-bold">710</span></div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-red-500 h-full rounded-full" style="width: 71%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-gray-400 mb-1"><span>Defensa</span><span class="text-white font-bold">900</span></div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-cyan-500 h-full rounded-full" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="glass-card rounded-2xl p-4 dragon-card border border-white/10 hover:border-amber-500/50 flex flex-col justify-between">
+          <div>
+            <div class="h-48 bg-gradient-to-b from-emerald-900/30 to-green-900/10 rounded-xl flex items-center justify-center relative mb-4">
+              <i class="fa-solid fa-dragon text-7xl text-emerald-400 drop-shadow-lg"></i>
+              <span class="absolute top-3 right-3 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold px-2 py-0.5 rounded-md">
+                PLANTA
+              </span>
+            </div>
+            <h3 class="text-xl font-bold mb-1">Dragón Bosque</h3>
+            <p class="text-xs text-gray-400 mb-4">Gran resistencia y venenos continuos.</p>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div>
+              <div class="flex justify-between text-gray-400 mb-1"><span>Ataque</span><span class="text-white font-bold">680</span></div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-red-500 h-full rounded-full" style="width: 68%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-gray-400 mb-1"><span>Defensa</span><span class="text-white font-bold">880</span></div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-emerald-500 h-full rounded-full" style="width: 88%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="glass-card rounded-2xl p-4 dragon-card border border-white/10 hover:border-amber-500/50 flex flex-col justify-between">
+          <div>
+            <div class="h-48 bg-gradient-to-b from-amber-900/30 to-purple-900/10 rounded-xl flex items-center justify-center relative mb-4">
+              <i class="fa-solid fa-dragon text-7xl text-amber-400 drop-shadow-lg"></i>
+              <span class="absolute top-3 right-3 bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold px-2 py-0.5 rounded-md">
+                LEGENDARIO
+              </span>
+            </div>
+            <h3 class="text-xl font-bold mb-1">Dragón Arcano</h3>
+            <p class="text-xs text-gray-400 mb-4">Poder cósmico de daño masivo.</p>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div>
+              <div class="flex justify-between text-gray-400 mb-1"><span>Ataque</span><span class="text-white font-bold">990</span></div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-amber-400 h-full rounded-full" style="width: 99%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-gray-400 mb-1"><span>Defensa</span><span class="text-white font-bold">950</span></div>
+              <div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-purple-500 h-full rounded-full" style="width: 95%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="caracteristicas" class="py-20 relative bg-black/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-5xl font-black tracking-tight mb-4">
+          ¿POR QUÉ JUGAR A <span class="text-amber-400">DRAGON CITY</span>?
+        </h2>
+        <p class="text-gray-400">Crea la ciudad flotante perfecta y demuestra tu estrategia en la arena.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="glass-card p-8 rounded-2xl border border-white/10 hover:border-amber-500/50 transition-all">
+          <div class="w-14 h-14 bg-gradient-to-tr from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-2xl mb-6 shadow-lg">
+            <i class="fa-solid fa-[#ffffff] fa-egg"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Crea y Cruza</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Combina dragones de distintos elementos para descubrir especies híbridas únicas y completar tu Libro de Dragones.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-2xl border border-white/10 hover:border-amber-500/50 transition-all">
+          <div class="w-14 h-14 bg-gradient-to-tr from-amber-500 to-red-600 rounded-xl flex items-center justify-center text-2xl mb-6 shadow-lg">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Combates PvP</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Enfréntate a otros Maestros del Dragón en las Arenas JcJ para escalar en las clasificaciones globales y ganar recompensas.
+          </p>
+        </div>
+
+        <div class="glass-card p-8 rounded-2xl border border-white/10 hover:border-amber-500/50 transition-all">
+          <div class="w-14 h-14 bg-gradient-to-tr from-purple-500 to-amber-500 rounded-xl flex items-center justify-center text-2xl mb-6 shadow-lg">
+            <i class="fa-solid fa-city"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-3">Islas Flotantes</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">
+            Personaliza tu propio archipiélago mágico en las nubes con hábitats, granjas de comida y grandes edificios.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FOOTER SECTION -->
+  <footer id="comunidad" class="border-t border-white/10 pt-16 pb-12 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 bg-gradient-to-tr from-amber-500 to-red-600 rounded-xl flex items-center justify-center font-black text-xl">
+            <i class="fa-solid fa-dragon"></i>
+          </div>
+          <span class="text-2xl font-black tracking-wider uppercase">Dragon City</span>
+        </div>
+
+        <div class="flex space-x-6 text-xl text-gray-400">
+          <a href="#" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-discord"></i></a>
+          <a href="#" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+        <p>&copy; 2026 Dragon City Fan Page. Todos los derechos reservados.</p>
+        <div class="flex space-x-6">
+          <a href="#" class="hover:underline">Términos de Servicio</a>
+          <a href="#" class="hover:underline">Política de Privacidad</a>
+          <a href="#" class="hover:underline">Soporte</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
 </body>
 </html>
